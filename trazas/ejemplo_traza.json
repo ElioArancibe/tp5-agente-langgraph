@@ -1,0 +1,337 @@
+{
+  "thread_id": "demo",
+  "turnos": [
+    {
+      "fecha": "2026-10-06T22:03:32",
+      "pregunta": "¿Cuántos pedidos tuvo el cliente 102 y cuál fue el total?",
+      "pasos": [
+        {
+          "nodo": "agente",
+          "accion": "llamar_herramienta",
+          "llamadas": [
+            {
+              "tool": "buscar_pedidos",
+              "args": {
+                "cliente_id": 102
+              }
+            }
+          ]
+        },
+        {
+          "nodo": "tools",
+          "tool": "buscar_pedidos",
+          "resultado": {
+            "cliente_id": 102,
+            "pedidos": 3,
+            "total": 14500,
+            "detalle": [
+              {
+                "id": 5002,
+                "fecha": "2026-07-15",
+                "estado": "entregado",
+                "total": 3500
+              },
+              {
+                "id": 5003,
+                "fecha": "2026-08-21",
+                "estado": "entregado",
+                "total": 4800
+              },
+              {
+                "id": 5004,
+                "fecha": "2026-09-30",
+                "estado": "en camino",
+                "total": 6200
+              }
+            ]
+          }
+        },
+        {
+          "nodo": "agente",
+          "accion": "responder",
+          "texto": "El cliente 102 tuvo 3 pedidos y el total gastado fue de $14.500."
+        }
+      ],
+      "llamadas_a_herramientas": 1,
+      "respuesta": "El cliente 102 tuvo 3 pedidos y el total gastado fue de $14.500."
+    },
+    {
+      "fecha": "2026-10-06T22:03:37",
+      "pregunta": "¿y el último qué tenía?",
+      "pasos": [
+        {
+          "nodo": "agente",
+          "accion": "llamar_herramienta",
+          "llamadas": [
+            {
+              "tool": "detalle_pedido",
+              "args": {
+                "pedido_id": 5004
+              }
+            }
+          ]
+        },
+        {
+          "nodo": "tools",
+          "tool": "detalle_pedido",
+          "resultado": {
+            "id": 5004,
+            "cliente_id": 102,
+            "fecha": "2026-09-30",
+            "estado": "en camino",
+            "total": 6200,
+            "items": [
+              {
+                "producto": "Hub USB-C",
+                "cantidad": 2,
+                "precio_unitario": 1900
+              },
+              {
+                "producto": "Cable HDMI 2m",
+                "cantidad": 2,
+                "precio_unitario": 1200
+              }
+            ]
+          }
+        },
+        {
+          "nodo": "agente",
+          "accion": "responder",
+          "texto": "El último pedido tenía:\n- 2 Hub USB-C (a $1.900 c/u)\n- 2 Cable HDMI 2m (a $1.200 c/u)"
+        }
+      ],
+      "llamadas_a_herramientas": 1,
+      "respuesta": "El último pedido tenía:\n- 2 Hub USB-C (a $1.900 c/u)\n- 2 Cable HDMI 2m (a $1.200 c/u)"
+    },
+    {
+      "fecha": "2026-10-06T22:03:42",
+      "pregunta": "¿Qué compró García en su pedido más reciente?",
+      "pasos": [
+        {
+          "nodo": "agente",
+          "accion": "llamar_herramienta",
+          "llamadas": [
+            {
+              "tool": "buscar_cliente",
+              "args": {
+                "nombre": "García"
+              }
+            }
+          ]
+        },
+        {
+          "nodo": "tools",
+          "tool": "buscar_cliente",
+          "resultado": {
+            "coincidencias": 2,
+            "clientes": [
+              {
+                "id": 101,
+                "nombre": "Ana García",
+                "email": "ana.garcia@mail.com",
+                "ciudad": "Córdoba"
+              },
+              {
+                "id": 104,
+                "nombre": "Diego García",
+                "email": "dgarcia@mail.com",
+                "ciudad": "Buenos Aires"
+              }
+            ]
+          }
+        },
+        {
+          "nodo": "agente",
+          "accion": "responder",
+          "texto": "Encontré dos clientes con ese apellido: Ana García y Diego García. ¿A cuál de los dos te referís?"
+        }
+      ],
+      "llamadas_a_herramientas": 1,
+      "respuesta": "Encontré dos clientes con ese apellido: Ana García y Diego García. ¿A cuál de los dos te referís?"
+    },
+    {
+      "fecha": "2026-10-06T22:03:50",
+      "pregunta": "Ana",
+      "pasos": [
+        {
+          "nodo": "agente",
+          "accion": "llamar_herramienta",
+          "llamadas": [
+            {
+              "tool": "buscar_pedidos",
+              "args": {
+                "cliente_id": 101
+              }
+            }
+          ]
+        },
+        {
+          "nodo": "tools",
+          "tool": "buscar_pedidos",
+          "resultado": {
+            "cliente_id": 101,
+            "pedidos": 2,
+            "total": 23600,
+            "detalle": [
+              {
+                "id": 5001,
+                "fecha": "2026-07-02",
+                "estado": "entregado",
+                "total": 8200
+              },
+              {
+                "id": 5007,
+                "fecha": "2026-09-28",
+                "estado": "preparando",
+                "total": 15400
+              }
+            ]
+          }
+        },
+        {
+          "nodo": "agente",
+          "accion": "llamar_herramienta",
+          "llamadas": [
+            {
+              "tool": "detalle_pedido",
+              "args": {
+                "pedido_id": 5007
+              }
+            }
+          ]
+        },
+        {
+          "nodo": "tools",
+          "tool": "detalle_pedido",
+          "resultado": {
+            "id": 5007,
+            "cliente_id": 101,
+            "fecha": "2026-09-28",
+            "estado": "preparando",
+            "total": 15400,
+            "items": [
+              {
+                "producto": "Webcam Full HD",
+                "cantidad": 1,
+                "precio_unitario": 9400
+              },
+              {
+                "producto": "Micrófono USB",
+                "cantidad": 1,
+                "precio_unitario": 6000
+              }
+            ]
+          }
+        },
+        {
+          "nodo": "agente",
+          "accion": "responder",
+          "texto": "En su pedido más reciente (el 5007), Ana García compró:\n- 1 Webcam Full HD ($9.400)\n- 1 Micrófono USB ($6.000)"
+        }
+      ],
+      "llamadas_a_herramientas": 2,
+      "respuesta": "En su pedido más reciente (el 5007), Ana García compró:\n- 1 Webcam Full HD ($9.400)\n- 1 Micrófono USB ($6.000)"
+    },
+    {
+      "fecha": "2026-10-06T22:04:01",
+      "pregunta": "¿Cuánto gastó en total Lucía Fernandes?",
+      "pasos": [
+        {
+          "nodo": "agente",
+          "accion": "llamar_herramienta",
+          "llamadas": [
+            {
+              "tool": "buscar_cliente",
+              "args": {
+                "nombre": "Lucía Fernandes"
+              }
+            }
+          ]
+        },
+        {
+          "nodo": "tools",
+          "tool": "buscar_cliente",
+          "resultado": {
+            "error": "No hay clientes que coincidan con 'Lucía Fernandes'. Revisá el nombre o pedí el ID."
+          }
+        },
+        {
+          "nodo": "agente",
+          "accion": "llamar_herramienta",
+          "llamadas": [
+            {
+              "tool": "buscar_cliente",
+              "args": {
+                "nombre": "Lucía"
+              }
+            }
+          ]
+        },
+        {
+          "nodo": "tools",
+          "tool": "buscar_cliente",
+          "resultado": {
+            "coincidencias": 1,
+            "clientes": [
+              {
+                "id": 103,
+                "nombre": "Lucía Fernández",
+                "email": "lucia.f@mail.com",
+                "ciudad": "Mendoza"
+              }
+            ]
+          }
+        },
+        {
+          "nodo": "agente",
+          "accion": "llamar_herramienta",
+          "llamadas": [
+            {
+              "tool": "buscar_pedidos",
+              "args": {
+                "cliente_id": 103
+              }
+            }
+          ]
+        },
+        {
+          "nodo": "tools",
+          "tool": "buscar_pedidos",
+          "resultado": {
+            "cliente_id": 103,
+            "pedidos": 1,
+            "total": 12000,
+            "detalle": [
+              {
+                "id": 5005,
+                "fecha": "2026-08-05",
+                "estado": "cancelado",
+                "total": 12000
+              }
+            ]
+          }
+        },
+        {
+          "nodo": "agente",
+          "accion": "responder",
+          "texto": "Lucía Fernández gastó un total de $12.000 (en su único pedido, que figura como cancelado)."
+        }
+      ],
+      "llamadas_a_herramientas": 3,
+      "respuesta": "Lucía Fernández gastó un total de $12.000 (en su único pedido, que figura como cancelado)."
+    },
+    {
+      "fecha": "2026-10-06T22:04:08",
+      "pregunta": "¿Qué clientes consultamos hasta ahora y cuál fue el primero?",
+      "pasos": [
+        {
+          "nodo": "agente",
+          "accion": "responder",
+          "texto": "Hasta ahora consultamos a los siguientes clientes:\n1. Cliente 102\n2. Ana García (Cliente 101)\n3. Lucía Fernández (Cliente 103)\n\nEl primero que consultamos fue el cliente 102."
+        }
+      ],
+      "llamadas_a_herramientas": 0,
+      "respuesta": "Hasta ahora consultamos a los siguientes clientes:\n1. Cliente 102\n2. Ana García (Cliente 101)\n3. Lucía Fernández (Cliente 103)\n\nEl primero que consultamos fue el cliente 102."
+    }
+  ]
+}
